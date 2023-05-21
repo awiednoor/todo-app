@@ -1,7 +1,9 @@
+import TodoList from './components/TodoList';
+
 function App() {
   return (
     <div className="App">
-      <h1>React Todo</h1>
+      <TodoList />
     </div>
   );
 }
