@@ -22,6 +22,7 @@ const initialState = {
       completed: false,
     },
   ],
+  isModalOpen: false,
 };
 const todoSlice = createSlice({
   name: 'todos',
@@ -41,8 +42,12 @@ const todoSlice = createSlice({
       const index = state.todos.findIndex((todo) => todo.id === action.payload);
       state.todos.splice(index, 1);
     },
+    toggleModal: (state) => {
+      state.isModalOpen = !state.isModalOpen;
+    },
   },
 });
 
-export const { addTodo, toggleTodo, deleteTodo } = todoSlice.actions;
+export const { addTodo, toggleTodo, deleteTodo, toggleModal } =
+  todoSlice.actions;
 export default todoSlice.reducer;

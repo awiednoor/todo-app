@@ -1,33 +1,36 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
 import { toggleTodo, deleteTodo } from '../state/todoReducer';
 
 function TodoItem({ todo }) {
   const dispatch = useDispatch();
+  const handleDelete = (task) => {
+    alert(`Are you sure you want to delete :\n ${task.title}`);
+    dispatch(deleteTodo(task.id));
+  };
   return (
     <div className="w-full flex-col">
       <div className="w-full flex items-start justify-between">
-        <div className="flex items-start">
+        <div className="flex items-center">
           <input
             type="checkbox"
-            className="w-6 h-6 border border-gray-300 mr-4"
+            className="w-4 h-4 border border-gray-300 mr-4 "
             checked={todo.completed}
             onChange={() => dispatch(toggleTodo(todo.id))}
           />
-          <h3
+          <h5
             style={{
               textDecoration: todo.completed ? 'line-through' : 'none',
             }}
-            className="text-xl font-semibold text-gray-800  w-fit-content "
+            className="text-lg font-semibold "
           >
             {todo.title}
-          </h3>
+          </h5>
         </div>
 
         <button
-          className="px-4 py-2 bg-blue-600 text-white mx-2"
-          onClick={() => dispatch(deleteTodo(todo.id))}
+          className=" w-20 h-10 bg-neutral-600 rounded-full font-bold hover:bg-rose-700 "
+          onClick={() => handleDelete(todo)}
         >
           Delete
         </button>
