@@ -1,12 +1,13 @@
 import { React, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { toggleTodo, deleteTodo } from '../state/todoReducer';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleTodoState, deleteTodo } from '../state/todoReducer';
 
 function TodoItem({ todo }) {
   const [alertMessage, setAlertMessage] = useState({
     show: false,
     title: '',
   });
+  const todoStates = useSelector((state) => state.todos.todoStates);
   const dispatch = useDispatch();
   const handleOk = (task) => {
     setAlertMessage({
@@ -25,20 +26,40 @@ function TodoItem({ todo }) {
       title: '',
     });
   };
+  const handleTodoChange = (e) => {
+    const selectedState = e.target.value.replace(/\s/g, '').toLowerCase();
+    dispatch(toggleTodoState({ id: todo.id, state: selectedState }));
+  };
+
   return (
     <div className="w-full flex-col">
       <div className="w-full flex items-start justify-between">
         <div className="flex items-center">
-          <input
-            type="checkbox"
-            className="w-4 h-4 border border-gray-300 mr-4 "
-            checked={todo.completed}
-            onChange={() => dispatch(toggleTodo(todo.id))}
-          />
+          <select
+            className="w-8 h-8 mr-4 bg-neutral-600 rounded-full font-bold hover:bg-green-700"
+            name="todoStates"
+            onChange={handleTodoChange}
+          >
+            <option disabled selected value>
+              change todo state
+            </option>
+            {todoStates.map((state) => (
+              <option value={state}>{state}</option>
+            ))}
+          </select>
+
           <h5
-            style={{
-              textDecoration: todo.completed ? 'line-through' : 'none',
-            }}
+            style={
+              todo.state === 'todo'
+                ? { color: '#34d399' }
+                : todo.state === 'inprogress'
+                ? { color: '#F59E0B' }
+                : todo.state === 'done'
+                ? { textDecoration: 'line-through' }
+                : todo.state === 'backlog'
+                ? { opacity: '70%' }
+                : { color: '#10B981' }
+            }
             className="text-lg font-semibold "
           >
             {todo.title}

@@ -7,21 +7,32 @@ const initialState = {
       id: uuidv4(),
       title: 'Complete Todo',
       description: 'Try to complete a todo item using the checkbox',
+      state: 'todo',
       completed: false,
     },
     {
       id: uuidv4(),
       title: 'Add Todo',
       description: 'Try to add a todo item using the input field',
+      state: 'inprogress',
       completed: false,
     },
     {
       id: uuidv4(),
       title: 'Delete Todo',
       description: 'Try to delete a todo item using the delete button',
+      state: 'done',
+      completed: false,
+    },
+    {
+      id: uuidv4(),
+      title: 'Change Todo State',
+      description: 'Try to delete a todo item using the delete button',
+      state: 'backlog',
       completed: false,
     },
   ],
+  todoStates: ['Todo', 'In Progress', 'Done', 'Backlog'],
   isModalOpen: false,
 };
 const todoSlice = createSlice({
@@ -31,12 +42,11 @@ const todoSlice = createSlice({
     addTodo: (state, action) => {
       state.todos.unshift(action.payload);
     },
-    toggleTodo: (state, action) => {
-      const index = state.todos.findIndex((todo) => todo.id === action.payload);
-      const removedTodo = state.todos.splice(index, 1)[0];
-      removedTodo.completed = !removedTodo.completed;
-      state.todos.push(removedTodo);
-      state.todos.sort((a, b) => a.completed - b.completed);
+    toggleTodoState: (state, action) => {
+      const index = state.todos.findIndex(
+        (todo) => todo.id === action.payload.id
+      );
+      state.todos[index].state = action.payload.state;
     },
     deleteTodo: (state, action) => {
       const index = state.todos.findIndex((todo) => todo.id === action.payload);
@@ -48,6 +58,6 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo, toggleTodo, deleteTodo, toggleModal } =
+export const { addTodo, toggleTodoState, deleteTodo, toggleModal } =
   todoSlice.actions;
 export default todoSlice.reducer;
