@@ -6,14 +6,14 @@ const initialState = {
     {
       id: uuidv4(),
       title: 'Complete Todo',
-      description: 'Try to complete a todo item using the checkbox',
+      description: 'Try to complete a todo item using the dropdown',
       state: 'todo',
       completed: false,
     },
     {
       id: uuidv4(),
       title: 'Add Todo',
-      description: 'Try to add a todo item using the input field',
+      description: 'Try to add a todo item using the add todo button',
       state: 'inprogress',
       completed: false,
     },
@@ -27,7 +27,7 @@ const initialState = {
     {
       id: uuidv4(),
       title: 'Change Todo State',
-      description: 'Try to delete a todo item using the delete button',
+      description: 'Try to change a todo item state using the dropdown',
       state: 'backlog',
       completed: false,
     },

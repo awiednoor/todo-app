@@ -13,9 +13,9 @@ function TodoList({ type }) {
     setList(filteredList);
   }, [todos, type]);
   return (
-    <div className="w-full min-h-96 flex flex-col justify-center items-center p-8 ">
+    <div className="w-1/2 mx-auto my-8 min-h-96 flex flex-col justify-center items-center p-8 border-t-2 border-neutral-700">
       <h1 className="text-2xl font-bold mb-4 ">{type}</h1>
-      <div className="w-1/2 flex flex-col justify-center items-center mt-8">
+      <div className="w-11/12 flex flex-col justify-center items-center mt-8">
         <ul className="flex flex-col w-full ">
           {list.map((todo) => (
             <li key={todo.id} className="my-4 border-b-2 border-neutral-400">
