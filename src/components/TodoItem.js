@@ -36,7 +36,7 @@ function TodoItem({ todo }) {
       <div className="w-full flex items-start justify-between">
         <div className="flex items-center">
           <select
-            className="w-8 h-8 mr-4 bg-neutral-600 rounded-full font-bold hover:bg-green-700"
+            className="w-6 h-6 mr-4 bg-white-600 rounded-full font-bold hover:bg-green-700"
             name="todoStates"
             onChange={handleTodoChange}
           >
