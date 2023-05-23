@@ -7,6 +7,7 @@ This is a simple Todo App built with React, Redux, and Tailwind. The app allows 
 - Add new tasks with a title and description.
 - Edit existing tasks to update the title and description.
 - Mark tasks as completed to track your progress.
+- Adit task state to be either TODO,DONE,INPROGRESS or BACKLOG.
 - Delete tasks that are no longer needed.
 
 ## Technologies Used
