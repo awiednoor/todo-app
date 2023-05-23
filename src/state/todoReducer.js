@@ -47,6 +47,11 @@ const todoSlice = createSlice({
         (todo) => todo.id === action.payload.id
       );
       state.todos[index].state = action.payload.state;
+      if (action.payload.state === 'done') {
+        state.todos[index].completed = true;
+      } else {
+        state.todos[index].completed = false;
+      }
     },
     deleteTodo: (state, action) => {
       const index = state.todos.findIndex((todo) => todo.id === action.payload);
