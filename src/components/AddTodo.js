@@ -12,6 +12,7 @@ function AddTodo() {
       id: uuidv4(),
       title: todoTitle,
       description: todoDescription,
+      state: 'todo',
       completed: false,
     };
     dispatch(addTodo(newTodo));
