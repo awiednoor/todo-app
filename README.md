@@ -15,7 +15,9 @@ This is a simple Todo App built with React, Redux, and Tailwind. The app allows 
 - [React] - The library for web and native user interfaces
 - [ReduxToolkit] - The official, opinionated, batteries-included toolset for efficient Redux development
 - [Tailwind] - A utility-first CSS framework packed with classes
+- [FlowBite] - Open-source library of over 600+ UI components
 
 [React]: https://react.dev/
 [ReduxToolkit]: https://redux-toolkit.js.org/
 [Tailwind]: https://tailwindcss.com/
+[FlowBite]: https://flowbite.com/

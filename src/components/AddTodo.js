@@ -1,13 +1,14 @@
-import { React, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { addTodo, toggleModal } from '../state/todoReducer';
+import { addTodo } from '../state/todoReducer';
 import { v4 as uuidv4 } from 'uuid';
-
-function AddTodo() {
-  const handleAddTodo = () => {
-    if (todoTitle.trim() === '') {
-      return;
-    }
+import { Modal, Button, Label, TextInput, Textarea } from 'flowbite-react';
+function AddTodo({ isOpen, setIsOpen }) {
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    const todoData = new FormData(e.target);
+    const todoTitle = todoData.get('task');
+    const todoDescription = todoData.get('description');
     const newTodo = {
       id: uuidv4(),
       title: todoTitle,
@@ -16,44 +17,60 @@ function AddTodo() {
       completed: false,
     };
     dispatch(addTodo(newTodo));
-    setTodoTitle('');
-    setTodoDescription('');
-    dispatch(toggleModal());
+    e.target.reset();
+    setIsOpen(false);
+  };
+
+  const handleClose = () => {
+    const form = document.getElementById('addTodoForm');
+    form.reset();
+    setIsOpen(false);
   };
 
   const dispatch = useDispatch();
-  const [todoTitle, setTodoTitle] = useState('');
-  const [todoDescription, setTodoDescription] = useState('');
+
   return (
     <div className="w-full flex flex-col items-evenly p-4">
-      <h4 className="text-2xl font-bold ">New Task</h4>
-      <input
-        className="w-full p-2 h-12 bg-neutral-800 rounded-lg border border-neutral-600 my-2"
-        type="text"
-        placeholder="Todo title..."
-        name="title"
-        value={todoTitle}
-        onChange={(e) => setTodoTitle(e.target.value)}
-      />
-
-      <textarea
-        className="flex border w-full border-gray-300 bg-neutral-800 p-2 rounded-lg border-neutral-600 my-2"
-        type="textArea"
-        placeholder="Add a description..."
-        rows={5}
-        name="description"
-        value={todoDescription}
-        onChange={(e) => setTodoDescription(e.target.value)}
-      />
-      <div className="grid justify-items-end w-full mt-4">
-        <button
-          className="px-6 py-2 bg-indigo-500 font-bold hover:bg-indigo-600 text-white mx-2 rounded-full disabled:hover:bg-indigo-500  disabled:opacity-75"
-          onClick={handleAddTodo}
-          disabled={todoTitle.trim() === ''}
-        >
-          Add Todo
-        </button>
-      </div>
+      <Modal show={isOpen} onClose={handleClose}>
+        <Modal.Header>Add new task</Modal.Header>
+        <form onSubmit={handleAddTodo} id="addTodoForm">
+          <Modal.Body>
+            <div className="space-y-6">
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="task" value="Todo" />
+                </div>
+                <TextInput
+                  id="task"
+                  name="task"
+                  type="text"
+                  placeholder="Add new todo"
+                  required={true}
+                />
+              </div>
+              <div id="textarea">
+                <div className="mb-2 block">
+                  <Label htmlFor="Description" value="Description" />
+                </div>
+                <Textarea
+                  id="description"
+                  name="description"
+                  placeholder="Add description..."
+                  rows={4}
+                />
+              </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button gradientDuoTone="purpleToBlue" type="submit">
+              Add Todo
+            </Button>
+            <Button color="gray" onClick={handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </form>
+      </Modal>
     </div>
   );
 }

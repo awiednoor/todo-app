@@ -1,15 +1,12 @@
-import TodoList from './components/TodoList';
-import TodoModal from './components/TodoModal';
-import { useSelector } from 'react-redux';
+import Layout from './components/Layout';
+import Project from './components/Project';
 
 function App() {
-  const todoStates = useSelector((state) => state.todos.todoStates);
   return (
-    <div className="w-full min-h-screen bg-neutral-800 text-white pt-32">
-      <TodoModal />
-      {todoStates.map((state) => (
-        <TodoList type={state} />
-      ))}
+    <div className="w-full min-h-screen ">
+      <Layout>
+        <Project />
+      </Layout>
     </div>
   );
 }
