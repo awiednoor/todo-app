@@ -2,6 +2,9 @@
 
 This is a simple Todo App built with React, Redux, and Tailwind. The app allows you to manage your tasks by adding, editing, and marking them as completed.
 
+## Demo
+https://splendid-kelpie-8b870b.netlify.app/ 
+
 ## Features
 
 - Add new tasks with a title and description.
